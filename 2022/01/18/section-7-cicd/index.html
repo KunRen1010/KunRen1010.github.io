@@ -16,20 +16,26 @@
   <meta name="author" content="Kun Ren">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Kun’s lab，nice to meet you！🤝  👨‍ Who is bloggerKun 🎓 EducationAalto University &amp;emsp; 2021.9 - nowM.S. in Security and Cloud ComputingCore Course: Web Software Development, Full Sta">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://example.com/about/index.html">
+    <meta name="description" content="Section 7: CI&#x2F;CD In reality, The whole workflow is more like this. First push our code to Github and merge code into master branch. Then Travis CI fetch all files from Github. After running , tes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Section 7: CI&#x2F;CD">
+<meta property="og:url" content="http://example.com/2022/01/18/section-7-cicd/index.html">
 <meta property="og:site_name" content="Kun&#39;s Lab">
-<meta property="og:description" content="Welcome to Kun’s lab，nice to meet you！🤝  👨‍ Who is bloggerKun 🎓 EducationAalto University &amp;emsp; 2021.9 - nowM.S. in Security and Cloud ComputingCore Course: Web Software Development, Full Sta">
+<meta property="og:description" content="Section 7: CI&#x2F;CD In reality, The whole workflow is more like this. First push our code to Github and merge code into master branch. Then Travis CI fetch all files from Github. After running , tes">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-24T09:45:33.000Z">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-11%2009.07.48.png">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-12%2019.58.18.png">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-12%2020.14.53.png">
+<meta property="article:published_time" content="2022-01-18T16:10:18.000Z">
 <meta property="article:modified_time" content="2022-04-24T15:37:38.718Z">
 <meta property="article:author" content="Kun Ren">
+<meta property="article:tag" content="Study">
+<meta property="article:tag" content="Tech">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-11%2009.07.48.png">
   
   
-  <title>关于 - Kun&#39;s Lab</title>
+  <title>Section 7: CI/CD - Kun&#39;s Lab</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -74,7 +80,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -175,9 +181,43 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="关于">
+            <span class="h2" id="subtitle" title="Section 7: CI/CD">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-18 16:10" pubdate>
+        2022年1月18日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      829 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7 分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -190,76 +230,104 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/img/avatar.png" srcset="/img/loading.gif" lazyload
-                   class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">Kun</div>
-    <div class="about-intro">想当设计师的电脑维修工</div>
-    <div class="about-icons">
-      
-        
-        
-        
-        <a href=https://github.com/KunRen1010 class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
-      
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Section 7: CI/CD</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Section-7-CI-x2F-CD"><a href="#Section-7-CI-x2F-CD" class="headerlink" title="Section 7: CI&#x2F;CD"></a>Section 7: CI&#x2F;CD</h1><p><img src="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-11%2009.07.48.png" srcset="/img/loading.gif" lazyload></p>
+<p>In reality, The whole workflow is more like this. First push our code to <em>Github</em> and merge code into <em>master branch</em>. Then <em>Travis CI</em> fetch all files from <em>Github</em>. After running , testing and building (run <em>npm start</em>, *npm test *and <em>npm run build</em>), Travis CI will deploy the built code into <em>AWS Hosting</em>.</p>
+<p>So the first step is to create a github repo. And config our Travis CI.</p>
+<p>Next, we need to tell Travis to build our image, run our test and delopy our build files to AWS.</p>
+<p><img src="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-12%2019.58.18.png" srcset="/img/loading.gif" lazyload></p>
+<p>Here is a config that can make Travis know what it should do. that is .travis.yml</p>
+<blockquote>
+<p>.travis.yml</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-attr">sudo:</span> <span class="hljs-string">required</span><br><span class="hljs-attr">services:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span><br><br><span class="hljs-attr">before_install:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">build</span> <span class="hljs-string">-t</span> <span class="hljs-string">docker-react</span> <span class="hljs-string">-f</span> <span class="hljs-string">Dockerfile.dev</span> <span class="hljs-string">.</span><br><br><span class="hljs-attr">script:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">docker</span> <span class="hljs-string">run</span> <span class="hljs-string">docker-react</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">test</span> <span class="hljs-string">--</span> <span class="hljs-string">--coverage</span><br><br></code></pre></td></tr></table></figure>
+
+
+<p>Yes, it works fine! and we can see some logs in Travis CI website.</p>
+<p><img src="https://kunren1010.github.io/post-images/docker-images/section-7/%E6%88%AA%E5%B1%8F2022-01-12%2020.14.53.png" srcset="/img/loading.gif" lazyload></p>
+<p>But for AWS delopment, unfornately I have no free account to do this. So I can just put the .travis.yml file here. It just uses the API of AWS. The whole process is just the same as run test.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Study/">Study</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Tech/">Tech</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/18/section-6-creating-a-production-grade-workflow/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Section 6: Creating a Production-Grade Workflow</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/18/section-8-9-building-and-dockerizeing-a-multi-container-application/">
+                        <span class="hidden-mobile">Section 8-9: Building and Dockerizeing a Multi-Container Application</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
   </div>
 </div>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    <blockquote>
-<p>Welcome to Kun’s lab，nice to meet you！🤝</p>
-</blockquote>
-<h2 id="👨‍-Who-is-blogger"><a href="#👨‍-Who-is-blogger" class="headerlink" title="👨‍ Who is blogger"></a>👨‍ Who is blogger</h2><p>Kun</p>
-<h2 id="🎓-Education"><a href="#🎓-Education" class="headerlink" title="🎓 Education"></a>🎓 Education</h2><p>Aalto University &amp;emsp; 2021.9 - now<br>M.S. in Security and Cloud Computing<br>Core Course: Web Software Development, Full Stack Web Development, Cloud Software and Systems, Information Security, Network Security, Web Software Development.<br>GPA: 4.4&#x2F;5.0</p>
-<p>Hubei University of Technology &amp;emsp; 2017.9 - 2021.6<br>B.E. Computer Science and Technology<br>Core Course: Data Structures and Algorithms, Database, Computer Network, Algorithm Analysis and Design. Object-Oriented Programming.<br>GPA: 3.59&#x2F;5.0</p>
-<h2 id="👨‍💻-Work-Experince"><a href="#👨‍💻-Work-Experince" class="headerlink" title="👨‍💻 Work Experince"></a>👨‍💻 Work Experince</h2><p>Kingsoft Cloud &amp;emsp; 2019.5 - 2019.9 &amp;emsp; Wuhan<br>Operations Engineer</p>
-<ol>
-<li>Maintain the stable operation of CDN, such as adjusting the coverage of the CDN services and bandwidth.</li>
-<li>Detect and repair the servers’ faults, process the alarms: inquire the system log, analyze the alarms l and find the causes of common errors, inform the data center and clients to solve problems.</li>
-<li>Use the Django framework to develop a tool to detect the server’s hard disk healthy status daily.</li>
-</ol>
-<h2 id="🤡-Two-Dummy-Projects"><a href="#🤡-Two-Dummy-Projects" class="headerlink" title="🤡 Two Dummy Projects"></a>🤡 Two Dummy Projects</h2><ol>
-<li><p>Anonymous Quiz <br>Using Deno and Oak to develop a question and answer system, Anyone can log in and create their questions, others will answer those questions randomly. see the project<br><a target="_blank" rel="noopener" href="https://wsd-project2-quiz.herokuapp.com/">here</a></p>
-</li>
-<li><p>Dummy Restaurant<br>Using React mainly, and FireBase for its database. This project is just a small food restaurant online, show all the food and customer can order online, see the project <a target="_blank" rel="noopener" href="https://wdaaaa.herokuapp.com/">here</a></p>
-</li>
-</ol>
-<h2 id="😎-Awards"><a href="#😎-Awards" class="headerlink" title="😎 Awards"></a>😎 Awards</h2><p>3rd Prize of Programming Contest of University &amp;emsp; 2017<br>3rd Prize of Group Programming Ladder Tournament &amp;emsp; 2018<br>Honorable Mention of The 2020 ICPC Asia Shanghai Regional Contest &amp;emsp; 2019</p>
-<h2 id="⛹-Hobbies"><a href="#⛹-Hobbies" class="headerlink" title="⛹ Hobbies"></a>⛹ Hobbies</h2><p>Computer and design</p>
-<h2 id="📬-Contact"><a href="#📬-Contact" class="headerlink" title="📬 Contact"></a>📬 Contact</h2><p><a href="mailto:&#x4b;&#x75;&#x6e;&#114;&#x65;&#x6e;&#49;&#48;&#x31;&#48;&#64;&#111;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#x6f;&#x6d;">&#x4b;&#x75;&#x6e;&#114;&#x65;&#x6e;&#49;&#48;&#x31;&#48;&#64;&#111;&#x75;&#x74;&#x6c;&#x6f;&#111;&#x6b;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<!-- Custom -->
 
-  </div>
 
-  
-</article>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     
 
     

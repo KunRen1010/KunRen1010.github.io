@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Kun Ren">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="DockerJust some Notes of docker Docker flags1. -t (tty)will create a tty where you can interact with the container. 2. -i (interactive)will instruct to pass the STDIN to the container.  3. -d (detache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Notes">
+<meta property="og:url" content="http://example.com/2021/12/01/docker-notes/index.html">
+<meta property="og:site_name" content="Kun&#39;s Lab">
+<meta property="og:description" content="DockerJust some Notes of docker Docker flags1. -t (tty)will create a tty where you can interact with the container. 2. -i (interactive)will instruct to pass the STDIN to the container.  3. -d (detache">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-01T06:15:53.000Z">
+<meta property="article:modified_time" content="2022-04-24T15:37:38.718Z">
+<meta property="article:author" content="Kun Ren">
+<meta property="article:tag" content="Study">
+<meta property="article:tag" content="Tech">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Docker Notes - Kun&#39;s Lab</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kun&#39;s Lab</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Docker Notes">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-01 06:15" pubdate>
+        2021年12月1日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker Notes</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>Just some Notes of docker</p>
+<h3 id="Docker-flags"><a href="#Docker-flags" class="headerlink" title="Docker flags"></a>Docker flags</h3><h4 id="1-t-tty"><a href="#1-t-tty" class="headerlink" title="1. -t (tty)"></a>1. -t (tty)</h4><p>will create a tty where you can interact with the container.</p>
+<h4 id="2-i-interactive"><a href="#2-i-interactive" class="headerlink" title="2. -i (interactive)"></a>2. -i (interactive)</h4><p>will instruct to pass the STDIN to the container. </p>
+<h4 id="3-d-detached"><a href="#3-d-detached" class="headerlink" title="3. -d (detached)"></a>3. -d (detached)</h4><p>the container will run in the background.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">docker run -d -it --name looper ubuntu<br></code></pre></td></tr></table></figure>
+<p><strong>docker run -d</strong> run container detached, <strong>-it</strong> allows you to interact with the container by using the command line.<strong>–name looper</strong> set a name to the container instead of a random name.</p>
+<h3 id="4-f"><a href="#4-f" class="headerlink" title="4. -f"></a>4. -f</h3><p>we can see the logs with the command below</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker logs -f looper<br></code></pre></td></tr></table></figure>
+<p>you can also see the logs with “attach”</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker attach loopper<br></code></pre></td></tr></table></figure>
+<p>if you press control+c in the attached terminal, the container is stopped. So it’s better to use <strong>–no–stdin</strong> flag for safity.</p>
+<h3 id="Docker-command"><a href="#Docker-command" class="headerlink" title="Docker command"></a>Docker command</h3><h4 id="1-exec"><a href="#1-exec" class="headerlink" title="1. exec"></a>1. exec</h4><p>If you want to create a new terminal in the container, you can run </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker exec -it looper bash<br></code></pre></td></tr></table></figure>
+<h4 id="2-kill"><a href="#2-kill" class="headerlink" title="2. kill"></a>2. kill</h4><p>You can also kill the process like below:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker kill looper<br></code></pre></td></tr></table></figure>
+<h4 id="3-rm"><a href="#3-rm" class="headerlink" title="3. rm"></a>3. rm</h4><p>You can remove the container </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker rm looper<br></code></pre></td></tr></table></figure>
+<h4 id="4-search"><a href="#4-search" class="headerlink" title="4. search"></a>4. search</h4><p>You can search images from the Docker Hub</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker search nginx<br></code></pre></td></tr></table></figure>
+<h4 id="5-tag"><a href="#5-tag" class="headerlink" title="5. tag"></a>5. tag</h4><p>You can rename your image like:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker tag ubuntu:18.04 ubuntu:bionic<br></code></pre></td></tr></table></figure>
+<h4 id="6-cp"><a href="#6-cp" class="headerlink" title="6. cp"></a>6. cp</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker cp /additional.txt zen_rosalind:/usr/src/app/<br></code></pre></td></tr></table></figure>
+
+<h3 id="Bind-mount"><a href="#Bind-mount" class="headerlink" title="Bind mount"></a>Bind mount</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run -v &quot;$(pwd):/mydir&quot; youtube-dl https://imgur.com/JY5tHqr<br></code></pre></td></tr></table></figure>
+
+<h3 id="Port-open"><a href="#Port-open" class="headerlink" title="Port open"></a>Port open</h3><blockquote>
+<p>To expose a port, add line EXPOSE <port> in your Dockerfile.<br>To publish a port, run the container with -p <host-port>:<container-port></p>
+</blockquote>
+<h3 id="Notice"><a href="#Notice" class="headerlink" title="Notice"></a>Notice</h3><p>An image name may consist of 3 parts plus a tag.<br>Usually like the following: <strong>registry&#x2F;organisation&#x2F;image:tag</strong></p>
+<p><strong>clean docker commandline</strong></p>
+<blockquote>
+<p>docker container prune<br>docker system prune</p>
+</blockquote>
+<h3 id="ENTRYPOINT-VS-CMD"><a href="#ENTRYPOINT-VS-CMD" class="headerlink" title="ENTRYPOINT VS CMD"></a>ENTRYPOINT VS CMD</h3><p>What is the difference between <strong>ENTRYPOINT</strong> and <strong>CMD</strong>?<br><strong>ENTRYPOINT</strong> is entry of the program, or just like a fuction.<br><strong>CMD</strong> is just like default parameter of <strong>ENTRYPOINT</strong> (fuction). And we can easily override it by adding an argument of docker run command.  </p>
+<h3 id="Shell-form-and-exec-form"><a href="#Shell-form-and-exec-form" class="headerlink" title="Shell form and exec form"></a>Shell form and exec form</h3><p>The main difference of those two is the bracket[] and quote “”.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">Shell form: &lt;instruction&gt; &lt;command&gt;<br>Exec form: &lt;instruction&gt; [&quot;executable&quot;, &quot;parameter&quot;]<br></code></pre></td></tr></table></figure>
+<p>The better way is only use exec form, because shell form will cause some unknown problem sometimes.</p>
+<h2 id="Depoly-image"><a href="#Depoly-image" class="headerlink" title="Depoly image"></a>Depoly image</h2><h1 id="Docker-Compose"><a href="#Docker-Compose" class="headerlink" title="Docker Compose"></a>Docker Compose</h1><h3 id="Bind-a-volume"><a href="#Bind-a-volume" class="headerlink" title="Bind a volume"></a>Bind a volume</h3><p>Volumes in docker-compose are defined with the following syntax <strong>location-in-host:location-in-container</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">nginx:</span><br>  <span class="hljs-attr">image:</span> <span class="hljs-string">nginx:alpine</span><br>  <span class="hljs-attr">volumes:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">./nginx.conf:/etc/nginx/nginx.conf:ro</span><br>  <span class="hljs-attr">ports:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-number">80</span><span class="hljs-string">:80</span><br>  <span class="hljs-attr">depends_on:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">backend</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">frontend</span><br>  <span class="hljs-attr">container_name:</span> <span class="hljs-string">nginx</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Environment-variables"><a href="#Environment-variables" class="headerlink" title="Environment variables"></a>Environment variables</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.5&#x27;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">backend:</span><br>      <span class="hljs-attr">image:</span>  <br>      <span class="hljs-attr">environment:</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">VARIABLE=VALUE</span><br>        <span class="hljs-bullet">-</span> <span class="hljs-string">VARIABLE</span> <br></code></pre></td></tr></table></figure>
+<p>The version number is no less than 2, because otherwise the syntax is significantly different</p>
+<h3 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h3><p>A major benefit of defining network is that it makes it easy to setup a configuration where other containers connect to an existing network as an external network. </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;3.8&quot;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">db:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres:13.2-alpine</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">database-network</span> <span class="hljs-comment"># Name in this docker-compose file</span><br><br><span class="hljs-attr">networks:</span><br>  <span class="hljs-attr">database-network:</span> <span class="hljs-comment"># Name in this docker-compose file</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">database-network</span> <span class="hljs-comment"># Name that will be the actual name of the network</span><br></code></pre></td></tr></table></figure>
+<p>To connect to an external network (possibly defined another docker-compose.yml):</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;3.8&quot;</span><br><br><span class="hljs-attr">services:</span><br>  <span class="hljs-attr">db:</span><br>    <span class="hljs-attr">image:</span> <span class="hljs-string">backend-image</span><br>    <span class="hljs-attr">networks:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-string">database-network</span><br><br><span class="hljs-attr">networks:</span><br>  <span class="hljs-attr">database-network:</span><br>    <span class="hljs-attr">external:</span><br>      <span class="hljs-attr">name:</span> <span class="hljs-string">database-network</span> <span class="hljs-comment"># Must match the actual name of the network</span><br></code></pre></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Study/">Study</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Tech/">Tech</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/08/section-1-dive-into-docker/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Section 1: Dive Into Docker</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/01/common-sql-syntax/">
+                        <span class="hidden-mobile">Common SQL syntax</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

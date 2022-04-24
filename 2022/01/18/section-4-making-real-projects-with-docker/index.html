@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Kun Ren">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Section 4: Making Real Projects with DockerFirst, We create a NodeJS demo project, like this: package.json  123456789&amp;#123;  &quot;dependencies&quot;: &amp;#123;    &quot;express&quot;: &quot;*&quot;  &amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Section 4: Making Real Projects with Docker">
+<meta property="og:url" content="http://example.com/2022/01/18/section-4-making-real-projects-with-docker/index.html">
+<meta property="og:site_name" content="Kun&#39;s Lab">
+<meta property="og:description" content="Section 4: Making Real Projects with DockerFirst, We create a NodeJS demo project, like this: package.json  123456789&amp;#123;  &quot;dependencies&quot;: &amp;#123;    &quot;express&quot;: &quot;*&quot;  &amp;#1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-4/image.png">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-4/image_1.png">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-4/image_2.png">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-4/image_3.png">
+<meta property="og:image" content="https://kunren1010.github.io/post-images/docker-images/section-4/%E6%88%AA%E5%B1%8F2022-01-09%2021.35.50.png">
+<meta property="article:published_time" content="2022-01-18T03:02:40.000Z">
+<meta property="article:modified_time" content="2022-04-24T15:37:38.718Z">
+<meta property="article:author" content="Kun Ren">
+<meta property="article:tag" content="Study">
+<meta property="article:tag" content="Tech">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://kunren1010.github.io/post-images/docker-images/section-4/image.png">
+  
+  
+  <title>Section 4: Making Real Projects with Docker - Kun&#39;s Lab</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Kun&#39;s Lab</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Section 4: Making Real Projects with Docker">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-18 03:02" pubdate>
+        2022年1月18日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      55 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Section 4: Making Real Projects with Docker</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Section-4-Making-Real-Projects-with-Docker"><a href="#Section-4-Making-Real-Projects-with-Docker" class="headerlink" title="Section 4: Making Real Projects with Docker"></a>Section 4: Making Real Projects with Docker</h1><h2 id="First-We-create-a-NodeJS-demo-project-like-this"><a href="#First-We-create-a-NodeJS-demo-project-like-this" class="headerlink" title="First, We create a NodeJS demo project, like this:"></a>First, We create a NodeJS demo project, like this:</h2><blockquote>
+<p>package.json</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><pre><code class="hljs JSON"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;express&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;*&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node index.js&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">&#125;</span><br><br></code></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>index.js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;express&#x27;</span>);<br><br><span class="hljs-keyword">const</span> app = <span class="hljs-title function_">express</span>();<br><br>app.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">req, res</span>) =&gt;</span> &#123;<br>  res.<span class="hljs-title function_">send</span>(<span class="hljs-string">&#x27;Hi there&#x27;</span>);<br>&#125;);<br><br>app.<span class="hljs-title function_">listen</span>(<span class="hljs-number">8080</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Listening on port 8080&#x27;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+
+<p>This is a simple project. And we can run this NodeJS project locally by using <em>npm install</em> and <em>npm run</em>.</p>
+<p><img src="https://kunren1010.github.io/post-images/docker-images/section-4/image.png" srcset="/img/loading.gif" lazyload></p>
+<p>So if we want to edit a Dockerfile to use docker to run this project. We can do some similar things when we create an image for redis.</p>
+<p><img src="https://kunren1010.github.io/post-images/docker-images/section-4/image_1.png" srcset="/img/loading.gif" lazyload></p>
+<p>But when we run Dockerfile like this:</p>
+<blockquote>
+<p>Dockerfile</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-string">FROM</span> <span class="hljs-string">alpine</span><br><span class="hljs-string">RUN</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br><span class="hljs-string">CMD</span> [<span class="hljs-string">&quot;npm&quot;</span>, <span class="hljs-string">&quot;start&quot;</span>]<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Bash">➜  simpleweb 2 docker build .<br>[+] Building 1.9s (6/6) FINISHED                                                <br> =&gt; [internal] load build definition from Dockerfile                       0.0s<br> =&gt; =&gt; transferring dockerfile: 91B                                        0.0s<br> =&gt; [internal] load .dockerignore                                          0.0s<br> =&gt; =&gt; transferring context: 2B                                            0.0s<br> =&gt; [internal] load metadata <span class="hljs-keyword">for</span> docker.io/library/alpine:latest           1.6s<br> =&gt; [auth] library/alpine:pull token <span class="hljs-keyword">for</span> registry-1.docker.io              0.0s<br> =&gt; CACHED [1/2] FROM docker.io/library/alpine@sha256:21a3deaa0d32a805791  0.0s<br> =&gt; ERROR [2/2] RUN npm install                                            0.2s<br>------<br> &gt; [2/2] RUN npm install:<br><span class="hljs-comment">#6 0.191 /bin/sh: npm: not found</span><br>------<br>executor failed running [/bin/sh -c npm install]: <span class="hljs-built_in">exit</span> code: 127<br></code></pre></td></tr></table></figure>
+
+
+<p>There is an error “ npm not found”. Why? Actually the reason is that the base image alpine does not contain <em>npm package manager</em>. So we need to change our base image to an image which contain <em>npm</em>, for example: <em>node:alpine</em></p>
+<blockquote>
+<p>Dockerfile</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-string">FROM</span> <span class="hljs-string">node:alpine</span><br><span class="hljs-string">RUN</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br><span class="hljs-string">CMD</span> [<span class="hljs-string">&quot;npm&quot;</span>, <span class="hljs-string">&quot;start&quot;</span>]<br></code></pre></td></tr></table></figure>
+
+
+<p>But there is a new error:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Bash">➜  simpleweb 2 docker build .<br>[+] Building 3.1s (6/6) FINISHED                                                <br> =&gt; [internal] load build definition from Dockerfile                       0.0s<br> =&gt; =&gt; transferring dockerfile: 96B                                        0.0s<br> =&gt; [internal] load .dockerignore                                          0.0s<br> =&gt; =&gt; transferring context: 2B                                            0.0s<br> =&gt; [internal] load metadata <span class="hljs-keyword">for</span> docker.io/library/node:alpine             1.4s<br> =&gt; [auth] library/node:pull token <span class="hljs-keyword">for</span> registry-1.docker.io                0.0s<br> =&gt; CACHED [1/2] FROM docker.io/library/node:alpine@sha256:4dd690ef859cea  0.0s<br> =&gt; ERROR [2/2] RUN npm install                                            1.6s<br>------                                                                          <br> &gt; [2/2] RUN npm install:<br><span class="hljs-comment">#6 1.553 npm ERR! Tracker &quot;idealTree&quot; already exists</span><br><span class="hljs-comment">#6 1.556 </span><br><span class="hljs-comment">#6 1.556 npm ERR! A complete log of this run can be found in:</span><br><span class="hljs-comment">#6 1.556 npm ERR!     /root/.npm/_logs/2022-01-09T19_18_59_392Z-debug-0.log</span><br>------<br>executor failed running [/bin/sh -c npm install]: <span class="hljs-built_in">exit</span> code: 1<br></code></pre></td></tr></table></figure>
+
+
+<p>It said that “failed running”, when we searched this error in google, we found that npm didn’t find package.json file in the image work directory. So how to fix it? yes, just copy our local files into image before we run <em>npm install</em>. And we would also *specific a work directory *for this application. Otherwise, this error will occur.</p>
+<blockquote>
+<p>Dockerfile</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-string">FROM</span> <span class="hljs-string">node:alpine</span><br><span class="hljs-string">WORKDIR</span> <span class="hljs-string">/app</span><br><span class="hljs-string">COPY</span> <span class="hljs-string">.</span> <span class="hljs-string">.</span><br><span class="hljs-string">RUN</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br><span class="hljs-string">CMD</span> [<span class="hljs-string">&quot;npm&quot;</span>, <span class="hljs-string">&quot;start&quot;</span>]<br><br></code></pre></td></tr></table></figure>
+
+
+<p>Yes, now, It work!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Bash">➜  simpleweb 2 docker build .<br>[+] Building 4.2s (9/9) FINISHED                                                <br> =&gt; [internal] load build definition from Dockerfile                       0.0s<br> =&gt; =&gt; transferring dockerfile: 118B                                       0.0s<br> =&gt; [internal] load .dockerignore                                          0.0s<br> =&gt; =&gt; transferring context: 2B                                            0.0s<br> =&gt; [internal] load metadata <span class="hljs-keyword">for</span> docker.io/library/node:alpine             0.6s<br> =&gt; [internal] load build context                                          0.0s<br> =&gt; =&gt; transferring context: 434B                                          0.0s<br> =&gt; [1/4] FROM docker.io/library/node:alpine@sha256:4dd690ef859ceadc242e9  0.0s<br> =&gt; CACHED [2/4] WORKDIR /app                                              0.0s<br> =&gt; [3/4] COPY . .                                                         0.0s<br> =&gt; [4/4] RUN npm install                                                  3.3s<br> =&gt; exporting to image                                                     0.2s<br> =&gt; =&gt; exporting layers                                                    0.2s<br> =&gt; =&gt; writing image sha256:ea974380f73c49623b7e2b65507a404640befae7b6372  0.0s <br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Next-run-this-image-and-open-a-port"><a href="#Next-run-this-image-and-open-a-port" class="headerlink" title="Next, run this image and open a port"></a>Next, run this image and open a port</h2><p><img src="https://kunren1010.github.io/post-images/docker-images/section-4/image_2.png" srcset="/img/loading.gif" lazyload></p>
+<p>By default, we cannot get access to docker container. So we need open a port for the application when we run this image.</p>
+<p><img src="https://kunren1010.github.io/post-images/docker-images/section-4/image_3.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Bash"><span class="hljs-comment"># docker run -p &lt;Local Port&gt; : &lt;Container Port&gt; &lt;image id&gt;</span><br>➜  simpleweb 2 docker run -p 3000:8080 ea974380f73c<br><br>&gt; start<br>&gt; node index.js<br><br>Listening on port 8080<br><br></code></pre></td></tr></table></figure>
+
+
+<p><img src="https://kunren1010.github.io/post-images/docker-images/section-4/%E6%88%AA%E5%B1%8F2022-01-09%2021.35.50.png" srcset="/img/loading.gif" lazyload></p>
+<p>Now, it works good so far.</p>
+<h2 id="Minimizing-Cache-Busting-and-Rebuilds"><a href="#Minimizing-Cache-Busting-and-Rebuilds" class="headerlink" title="Minimizing Cache Busting and Rebuilds"></a>Minimizing Cache Busting and Rebuilds</h2><p>When we make any change on our application. We need to rebuild our Dockerfile. But here is a problem. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Bash">➜  simpleweb 2 docker build .<br>[+] Building 1.7s (10/10) FINISHED                                              <br> =&gt; [internal] load build definition from Dockerfile                       0.0s<br> =&gt; =&gt; transferring dockerfile: 36B                                        0.0s<br> =&gt; [internal] load .dockerignore                                          0.0s<br> =&gt; =&gt; transferring context: 2B                                            0.0s<br> =&gt; [internal] load metadata <span class="hljs-keyword">for</span> docker.io/library/node:alpine             1.6s<br> =&gt; [auth] library/node:pull token <span class="hljs-keyword">for</span> registry-1.docker.io                0.0s<br> =&gt; [internal] load build context                                          0.0s<br> =&gt; =&gt; transferring context: 352B                                          0.0s<br>** =&gt; [1/4] FROM docker.io/library/node:alpine@sha256:4dd690ef859ceadc242e9  0.0s<br> =&gt; CACHED [2/4] WORKDIR /app                                              0.0s<br> =&gt; CACHED [3/4] COPY . .                                                  0.0s<br> =&gt; CACHED [4/4] RUN npm install                                           0.0s**<br> =&gt; exporting to image                                                     0.0s<br> =&gt; =&gt; exporting layers                                                    0.0s<br> =&gt; =&gt; writing image sha256:ea974380f73c49623b7e2b65507a404640befae7b6372  0.0s<br></code></pre></td></tr></table></figure>
+
+
+<p>We can see that if we do not change the Dockerfile, docker will rebuild the image from cache. But if we change the application code. what will happen?\</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Bash">➜  simpleweb 2 vim index.js <br>➜  simpleweb 2 docker build .<br>[+] Building 4.1s (9/9) FINISHED                                                 <br> =&gt; [internal] load build definition from Dockerfile                        0.0s<br> =&gt; =&gt; transferring dockerfile: 36B                                         0.0s<br> =&gt; [internal] load .dockerignore                                           0.0s<br> =&gt; =&gt; transferring context: 2B                                             0.0s<br> =&gt; [internal] load metadata <span class="hljs-keyword">for</span> docker.io/library/node:alpine              0.6s<br> =&gt; [1/4] FROM docker.io/library/node:alpine@sha256:4dd690ef859ceadc242e99  0.0s<br> =&gt; [internal] load build context                                           0.0s<br> =&gt; =&gt; transferring context: 556B                                           0.0s<br> =&gt; CACHED [2/4] WORKDIR /app                                               0.0s<br> =&gt; [3/4] COPY . .                                                          0.0s<br> =&gt; [4/4] RUN npm install                                                   3.3s<br> =&gt; exporting to image                                                      0.2s<br> =&gt; =&gt; exporting layers                                                     0.2s<br> =&gt; =&gt; writing image sha256:d5358f17ecaef0757294a7569d212ba28d0c90dc474f66  0.0s<br><br></code></pre></td></tr></table></figure>
+
+
+<p>We can find that <strong>docker rebuild from the line we modified</strong>, but that makes sense, because the FileSystem snapshot from the that line has changed. We do not have a cache from that modified line.</p>
+<p>So how can we optimize our Dockerfile to make <em>npm install</em> not run again and again? But to use the cache?</p>
+<blockquote>
+<p>Dockerfile</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-string">FROM</span> <span class="hljs-string">node:alpine</span><br><span class="hljs-string">WORKDIR</span> <span class="hljs-string">/usr/app</span><br><span class="hljs-string">COPY</span> <span class="hljs-string">./package.json</span> <span class="hljs-string">.</span><br><span class="hljs-string">RUN</span> <span class="hljs-string">npm</span> <span class="hljs-string">install</span><br><span class="hljs-string">COPY</span> <span class="hljs-string">.</span> <span class="hljs-string">.</span><br><span class="hljs-string">CMD</span> [<span class="hljs-string">&quot;npm&quot;</span>, <span class="hljs-string">&quot;start&quot;</span>]<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Bash">➜  simpleweb 2 vim index.js <br>➜  simpleweb 2 docker build .<br>[+] Building 0.7s (10/10) FINISHED                                              <br> =&gt; [internal] load build definition from Dockerfile                       0.0s<br> =&gt; =&gt; transferring dockerfile: 36B                                        0.0s<br> =&gt; [internal] load .dockerignore                                          0.0s<br> =&gt; =&gt; transferring context: 2B                                            0.0s<br> =&gt; [internal] load metadata <span class="hljs-keyword">for</span> docker.io/library/node:alpine             0.6s<br> =&gt; [1/5] FROM docker.io/library/node:alpine@sha256:4dd690ef859ceadc242e9  0.0s<br> =&gt; [internal] load build context                                          0.0s<br> =&gt; =&gt; transferring context: 553B                                          0.0s<br> =&gt; CACHED [2/5] WORKDIR /usr/app                                          0.0s<br> =&gt; CACHED [3/5] COPY ./package.json .                                     0.0s<br> =&gt; CACHED [4/5] RUN npm install                                           0.0s<br> =&gt; [5/5] COPY . .                                                         0.0s<br> =&gt; exporting to image                                                     0.0s<br> =&gt; =&gt; exporting layers                                                    0.0s<br> =&gt; =&gt; writing image sha256:2b65a064f4ee33dc9ebbb786647c860a3ce2b4a41f266  0.0s<br></code></pre></td></tr></table></figure>
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Study/">Study</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Tech/">Tech</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/18/section-5-docker-compose-with-multiple-local-containers/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Section 5: Docker Compose with Multiple Local Containers</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/17/section-3-building-custom-images-through-docker-server/">
+                        <span class="hidden-mobile">Section 3: Building Custom Images Through Docker Server</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
